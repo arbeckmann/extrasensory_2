@@ -78,6 +78,8 @@ def importData(dataPath):
         user_file_path = dataPath + user_file
 
         user_data = read_user_data(user_file_path)
+        user_data = user_data.drop(["Timestamp"], axis=1)
+        user_data.columns.values[-51:] = "label_" + user_data.columns.values[-51:]
         user_data["User"] = user
         data_list.append(user_data)
 

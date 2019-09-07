@@ -36,27 +36,27 @@ def prepareData(dataset):
 
     # audio
     audio_features = [feature for feature in dataset.columns.values if feature.startswith(('audio'))]
-    audio_set = dataset.loc[:, audio_features + time + labels]
+    audio_set = dataset.loc[:, audio_features + time]
 
     # phonestate
     ps_features = [feature for feature in dataset.columns.values if feature.startswith(('lf_', 'discrete:'))]
-    ps_set = dataset.loc[:, ps_features + labels]
+    ps_set = dataset.loc[:, ps_features]
 
     # location
     loc_features = [feature for feature in dataset.columns.values if feature.startswith(('location'))]
-    loc_set = dataset.loc[:, loc_features + time + labels]
+    loc_set = dataset.loc[:, loc_features + time]
 
     # acc
     acc_features = [feature for feature in dataset.columns.values if feature.startswith(('proc_gyro',
                                                                                          'raw_acc', 'watch'))]
-    acc_set = dataset.loc[:, acc_features + time + labels]
+    acc_set = dataset.loc[:, acc_features + time]
 
     # magnet
     magnet_features = [feature for feature in dataset.columns.values if feature.startswith(('raw_magnet'))]
-    magnet_set = dataset.loc[:, magnet_features + time + labels]
+    magnet_set = dataset.loc[:, magnet_features + time]
 
     return {"audio": audio_set, "phonestate": ps_set, "location": loc_set, "acceleration": acc_set,
-            "magnet": magnet_set}
+            "magnet": magnet_set, "target": dataset.loc[:, labels]}
 
 
 if __name__ == "__main__":
